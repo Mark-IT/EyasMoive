@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 # Author:huchong
-
+import os
 import redis
 
 
@@ -14,12 +14,17 @@ class BaseConfig(object):
     # 追踪对象的修改并且发送信号
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
+    UP_DIR = os.path.join(os.path.abspath(os.path.dirname(__file__)), "static/uploads/")
+    FC_DIR = os.path.join(os.path.abspath(os.path.dirname(__file__)), "static/uploads/users/")
+
+
 
 class ProductionConfig(BaseConfig):
     SESSION_REDIS = redis.Redis(host='192.168.200.128', port=6379)  # 用于连接redis的配置
 
 
 class DevelopmentConfig(BaseConfig):
+    DEBUG =True
     SESSION_REDIS = redis.Redis(host='192.168.200.128', port=6379)  # 用于连接redis的配置
 
 

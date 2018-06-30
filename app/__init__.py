@@ -15,8 +15,7 @@ from .models import * # 导入models中的表，不然数据库迁移无效
 
 
 def create_app():
-    app = Flask(__name__)
-    app.debug = True
+    app = Flask(__name__, template_folder='../templates', static_folder='../static')
     app.secret_key = 'sdiusdfsdf'
     # 设置配置文件
     app.config.from_object('app.config.DevelopmentConfig')
