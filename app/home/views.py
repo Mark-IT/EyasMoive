@@ -5,7 +5,6 @@
 
 from app.ext import db
 
-
 # coding:utf8
 from . import home
 from flask import render_template, redirect, url_for, flash, session, request, Response
@@ -21,6 +20,8 @@ import os
 import datetime
 
 rd = DevelopmentConfig.SESSION_REDIS
+
+
 # 登录装饰器
 def user_login_req(f):
     @wraps(f)
@@ -83,6 +84,7 @@ def regist():
         db.session.add(user)
         db.session.commit()
         flash("注册成功！", "ok")
+        return redirect(url_for("home.login"))
     return render_template("home/regist.html", form=form)
 
 
@@ -398,7 +400,7 @@ def video(id=None, page=None):
 def tm():
     import json
     if request.method == "GET":
-        #获取弹幕消息队列
+        # 获取弹幕消息队列
         id = request.args.get('id')
         key = "movie" + str(id)
         if rd.llen(key):
@@ -414,7 +416,7 @@ def tm():
             }
         resp = json.dumps(res)
     if request.method == "POST":
-        #添加弹幕
+        # 添加弹幕
         data = json.loads(request.get_data())
         msg = {
             "__v": 0,

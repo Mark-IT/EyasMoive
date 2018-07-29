@@ -14,8 +14,8 @@ class BaseConfig(object):
     # 追踪对象的修改并且发送信号
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-    UP_DIR = os.path.join(os.path.abspath(os.path.dirname(__file__)), "static/uploads/")
-    FC_DIR = os.path.join(os.path.abspath(os.path.dirname(__file__)), "static/uploads/users/")
+    UP_DIR = os.path.join(os.path.abspath(os.path.dirname(os.path.dirname(__file__))), "static/uploads/")
+    FC_DIR = os.path.join(os.path.abspath(os.path.dirname(os.path.dirname(__file__))), "static/uploads/users/")
 
 
 

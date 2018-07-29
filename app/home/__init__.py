@@ -5,6 +5,6 @@
 
 from flask import Blueprint
 
-home = Blueprint('home', __name__)
+home = Blueprint('home', __name__, static_folder='./static')
 
 import app.home.views

@@ -11,7 +11,7 @@ class User(db.Model):
     __tablename__ = "user"
     id = db.Column(db.Integer, primary_key=True)  # 编号
     name = db.Column(db.String(100), unique=True)  # 昵称
-    _password = db.Column(db.String(100))  # 密码,使用哈希密码
+    pwd = db.Column(db.String(100))  # 密码,使用哈希密码
     email = db.Column(db.String(100), unique=True)  # 邮箱
     phone = db.Column(db.String(11), unique=True)  # 手机号码
     info = db.Column(db.Text)  # 个性简介
@@ -27,15 +27,15 @@ class User(db.Model):
 
     @property
     def password(self):
-        return self._password
+        return self.pwd
 
     # 使用user.password='xxx'设置时存入生成的散列密码
     @password.setter
     def password(self, new_password):
-        self._password = generate_password_hash(new_password)
+        self.pwd = generate_password_hash(new_password)
 
     def check_pwd(self, try_password):
-        return check_password_hash(self._password, try_password)
+        return check_password_hash(self.pwd, try_password)
 
 
 # 会员登录日志
