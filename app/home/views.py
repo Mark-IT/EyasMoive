@@ -3,10 +3,7 @@
 # __author__ = "HuChong"
 # Date: 2018/4/22
 
-from app.ext import db
 
-# coding:utf8
-from . import home
 from flask import render_template, redirect, url_for, flash, session, request, Response
 from app.home.forms import RegistForm, LoginForm, UserdetailForm, PwdForm, CommentForm
 from app.models import User, Userlog, Preview, Tag, Movie, Comment, Moviecol
@@ -15,9 +12,12 @@ from werkzeug.utils import secure_filename
 from app import config
 from app.config import DevelopmentConfig
 from functools import wraps
+from app.ext import db
+from . import home
 import uuid
 import os
 import datetime
+
 
 rd = DevelopmentConfig.SESSION_REDIS
 

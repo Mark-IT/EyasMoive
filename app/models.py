@@ -152,7 +152,7 @@ class Admin(db.Model):
     __tablename__ = "admin"
     id = db.Column(db.Integer, primary_key=True)  # 编号
     name = db.Column(db.String(100), unique=True)  # 管理员账号
-    _password = db.Column(db.String(100))  # 管理员密码
+    pwd = db.Column(db.String(100))  # 管理员密码
     is_super = db.Column(db.SmallInteger)  # 是否为超级管理员，0为超级管理员
     role_id = db.Column(db.Integer, db.ForeignKey('role.id'))  # 所属角色
     addtime = db.Column(db.DateTime, index=True, default=datetime.now)  # 添加时间
@@ -164,15 +164,15 @@ class Admin(db.Model):
 
     @property
     def password(self):
-        return self._password
+        return self.pwd
 
     # 使用user.password='xxx'设置时存入生成的散列密码
     @password.setter
     def password(self, new_password):
-        self._password = generate_password_hash(new_password)
+        self.pwd = generate_password_hash(new_password)
 
     def check_pwd(self, try_password):
-        return check_password_hash(self._password, try_password)
+        return check_password_hash(self.pwd, try_password)
 
 
 # 管理员登录日志
@@ -200,5 +200,5 @@ class Oplog(db.Model):
         return "<Oplog %r>" % self.id
 
 
-if __name__ == '__main__':
-    pass
+if __name__ == "__main__":
+   pass

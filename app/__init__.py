@@ -5,13 +5,8 @@
 
 from flask import Flask
 
-
-from app.home import home as home_blueprint
-from app.admin import admin as admin_blueprint
-
-
-from .ext import *  #导入组件
-from .models import * # 导入models中的表，不然数据库迁移无效
+from .ext import *  # 导入组件
+from .models import *  # 导入models中的表，不然数据库迁移无效
 
 
 def create_app():
@@ -31,7 +26,12 @@ def create_app():
     """
 
     # 注册蓝图
+    from app.home import home as home_blueprint
+    from app.admin import admin as admin_blueprint
 
     app.register_blueprint(home_blueprint)
     app.register_blueprint(admin_blueprint, url_prefix='/admin')
     return app
+
+
+
